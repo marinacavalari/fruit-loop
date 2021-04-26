@@ -1,0 +1,90 @@
+; This is the Calva evaluation results output window.
+; TIPS: The keyboard shortcut `ctrl+alt+c o` shows and focuses this window
+;   when connected to a REPL session.
+; Please see https://calva.io/output/ for more info.
+; Happy coding! ♥️
+
+; Jacking in...
+; Starting Jack-in Terminal: lein update-in :dependencies conj '[nrepl,"0.8.3"]' -- update-in :plugins conj '[cider/cider-nrepl,"0.25.11"]' -- update-in '[:repl-options,:nrepl-middleware]' conj '["cider.nrepl/cider-middleware"]' -- with-profile +dev repl :headless
+; Hooking up nREPL sessions...
+; Connected session: clj
+; TIPS: 
+;   - You can edit the contents here. Use it as a REPL if you like.
+;   - `alt+enter` evaluates the current top level form.
+;   - `ctrl+enter` evaluates the current form.
+;   - `alt+up` and `alt+down` traverse up and down the REPL command history
+;      when the cursor is after the last contents at the prompt
+;   - Clojure lines in stack traces are peekable and clickable.
+clj꞉fruit-loop.main꞉> 
+; Jack-in done.
+clj꞉fruit-loop.main꞉> 
+#'fruit-loop.main/-main
+clj꞉fruit-loop.main꞉> 
+{:io.pedestal.http/port 8080,
+ :io.pedestal.http/service-fn #function[io.pedestal.http.impl.servlet-interceptor/interceptor-service-fn/fn--15767],
+ :io.pedestal.http/host "localhost",
+ :io.pedestal.http/secure-headers {:content-security-policy-settings {:object-src "'none'"}},
+ :io.pedestal.http/type :jetty,
+ :io.pedestal.http/start-fn #function[io.pedestal.http.jetty/server/fn--21534],
+ :env :dev,
+ :io.pedestal.http/allowed-origins {:creds true, :allowed-origins #function[clojure.core/constantly/fn--5689]},
+ :io.pedestal.http/resource-path "/public",
+ :io.pedestal.http/interceptors
+ [{:name :io.pedestal.http.impl.servlet-interceptor/exception-debug,
+   :enter nil,
+   :leave nil,
+   :error #function[io.pedestal.http.impl.servlet-interceptor/error-debug]}
+  {:name :io.pedestal.http.cors/dev-allow-origin,
+   :enter #function[io.pedestal.interceptor.helpers/before/fn--10818],
+   :leave nil,
+   :error nil}
+  {:name :io.pedestal.http/log-request,
+   :enter #function[io.pedestal.interceptor.helpers/on-request/fn--10874],
+   :leave nil,
+   :error nil}
+  {:name :io.pedestal.http.cors/allow-origin,
+   :enter #function[io.pedestal.http.cors/allow-origin/fn--15817],
+   :leave #function[io.pedestal.http.cors/allow-origin/fn--15829],
+   :error nil}
+  {:name :io.pedestal.http/not-found,
+   :enter nil,
+   :leave #function[io.pedestal.interceptor.helpers/after/fn--10838],
+   :error nil}
+  {:name :io.pedestal.http.ring-middlewares/content-type-interceptor,
+   :enter nil,
+   :leave #function[io.pedestal.interceptor.helpers/after/fn--10838],
+   :error nil}
+  {:name :io.pedestal.http.route/query-params,
+   :enter #function[io.pedestal.http.route/fn--11746],
+   :leave nil,
+   :error nil}
+  {:name :io.pedestal.http.route/path-params-decoder,
+   :enter #function[io.pedestal.http.route/fn--11748],
+   :leave nil,
+   :error nil}
+  {:name :io.pedestal.http.route/method-param,
+   :enter #function[io.pedestal.http.route/method-param/fn--11751],
+   :leave nil,
+   :error nil}
+  {:name :io.pedestal.http.secure-headers/secure-headers,
+   :enter nil,
+   :leave #function[io.pedestal.http.secure-headers/secure-headers/fn--14104],
+   :error nil}
+  {:name :io.pedestal.http.ring-middlewares/resource,
+   :enter #function[io.pedestal.interceptor.helpers/before/fn--10818],
+   :leave nil,
+   :error nil}
+  {:name :io.pedestal.http.route/router,
+   :enter #function[io.pedestal.http.route/eval11738/fn--11739/fn--11740],
+   :leave nil,
+   :error nil}],
+ :io.pedestal.http/routes #function[fruit-loop.handlers.routes/fn--15938],
+ :io.pedestal.http/servlet
+ #object[io.pedestal.http.servlet.FnServlet 0x7c3fa644 "io.pedestal.http.servlet.FnServlet@7c3fa644"],
+ :io.pedestal.http/server
+ #object[org.eclipse.jetty.server.Server 0x609207dc "Server@609207dc{STARTED}[9.4.18.v20190429]"],
+ :io.pedestal.http/join? false,
+ :io.pedestal.http/stop-fn #function[io.pedestal.http.jetty/server/fn--21536]}
+clj꞉fruit-loop.main꞉> 
+#'fruit-loop.handlers.routes/dev-server-config
+clj꞉fruit-loop.handlers.routes꞉> 
