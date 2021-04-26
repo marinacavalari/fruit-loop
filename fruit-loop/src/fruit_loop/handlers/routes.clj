@@ -2,18 +2,20 @@
   (:require [io.pedestal.http :as server]
             [io.pedestal.http.body-params :as body-params]
             [io.pedestal.http.route :as route]
-            [cheshire.core :as json]))
+            [fruit-loop.controllers.board :as c.board]))
 
 (def common-interceptors
   [(body-params/body-params)])
 
-(defn- create-board [request]
+(defn- create-board [{{:keys [width height]} :json-params}]
+  (c.board/create width height)
   {:status 201
    :headers {"Content-Type" "application/json"}
-   :body (json/encode {:a (:json-params request)})})
+   :body {}})
+
 
 (defn routes []
-  #{["/" :post (conj common-interceptors create-board) :route-name :create-board]})
+  #{["/board" :post (conj common-interceptors create-board) :route-name :create-board]})
 
 (def server-config
   {::server/port 8080

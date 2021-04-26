@@ -18,14 +18,57 @@
 clj꞉fruit-loop.main꞉> 
 ; Jack-in done.
 clj꞉fruit-loop.main꞉> 
-#'fruit-loop.main/-main
+; Syntax error compiling at (src/fruit_loop/main.clj:7:3).
+; No such namespace: server
+clj꞉fruit-loop.main꞉> 
+; Syntax error (FileNotFoundException) compiling at (fruit_loop/handlers/routes.clj:1:1).
+; Could not locate fruit_loop/controllers/create__init.class, fruit_loop/controllers/create.clj or fruit_loop/controllers/create.cljc on classpath. Please check that namespaces with dashes use underscores in the Clojure file name.
+clj꞉fruit-loop.main꞉> 
+nil
+clj꞉fruit-loop.controllers.board꞉> 
+#'fruit-loop.controllers.board/create
+clj꞉fruit-loop.controllers.board꞉> 
+; Syntax error (FileNotFoundException) compiling at (fruit_loop/handlers/routes.clj:1:1).
+; Could not locate fruit_loop/controllers/create__init.class, fruit_loop/controllers/create.clj or fruit_loop/controllers/create.cljc on classpath. Please check that namespaces with dashes use underscores in the Clojure file name.
+clj꞉fruit-loop.main꞉> 
+; Syntax error (FileNotFoundException) compiling at (fruit_loop/handlers/routes.clj:1:1).
+; Could not locate fruit_loop/controllers/create__init.class, fruit_loop/controllers/create.clj or fruit_loop/controllers/create.cljc on classpath. Please check that namespaces with dashes use underscores in the Clojure file name.
+clj꞉fruit-loop.main꞉> 
+nil
+clj꞉fruit-loop.handlers.routes꞉> 
+; Syntax error compiling at (src/fruit_loop/handlers/routes.clj:11:3).
+; No such var: c.board/board-db
+clj꞉fruit-loop.handlers.routes꞉> 
+#'fruit-loop.handlers.routes/common-interceptors
+clj꞉fruit-loop.handlers.routes꞉> 
+; Syntax error compiling at (src/fruit_loop/handlers/routes.clj:11:3).
+; No such var: c.board/board-db
+clj꞉fruit-loop.handlers.routes꞉> 
+; Syntax error compiling at (src/fruit_loop/handlers/routes.clj:11:3).
+; No such var: c.board/board-db
+clj꞉fruit-loop.handlers.routes꞉> 
+; Syntax error compiling at (src/fruit_loop/handlers/routes.clj:11:3).
+; No such var: c.board/board-db
+clj꞉fruit-loop.handlers.routes꞉> 
+; Syntax error compiling at (src/fruit_loop/handlers/routes.clj:11:3).
+; No such var: c.board/board-db
+clj꞉fruit-loop.handlers.routes꞉> 
+#'fruit-loop.handlers.routes/create-board
+clj꞉fruit-loop.handlers.routes꞉> 
+#'fruit-loop.handlers.routes/routes
+clj꞉fruit-loop.handlers.routes꞉> 
+#'fruit-loop.handlers.routes/server-config
+clj꞉fruit-loop.handlers.routes꞉> 
+#'fruit-loop.handlers.routes/dev-server-config
+clj꞉fruit-loop.handlers.routes꞉> 
+nil
 clj꞉fruit-loop.main꞉> 
 {:io.pedestal.http/port 8080,
  :io.pedestal.http/service-fn #function[io.pedestal.http.impl.servlet-interceptor/interceptor-service-fn/fn--15767],
  :io.pedestal.http/host "localhost",
  :io.pedestal.http/secure-headers {:content-security-policy-settings {:object-src "'none'"}},
  :io.pedestal.http/type :jetty,
- :io.pedestal.http/start-fn #function[io.pedestal.http.jetty/server/fn--21534],
+ :io.pedestal.http/start-fn #function[io.pedestal.http.jetty/server/fn--21654],
  :env :dev,
  :io.pedestal.http/allowed-origins {:creds true, :allowed-origins #function[clojure.core/constantly/fn--5689]},
  :io.pedestal.http/resource-path "/public",
@@ -78,13 +121,49 @@ clj꞉fruit-loop.main꞉> 
    :enter #function[io.pedestal.http.route/eval11738/fn--11739/fn--11740],
    :leave nil,
    :error nil}],
- :io.pedestal.http/routes #function[fruit-loop.handlers.routes/fn--15938],
+ :io.pedestal.http/routes #function[fruit-loop.handlers.routes/fn--21566],
  :io.pedestal.http/servlet
- #object[io.pedestal.http.servlet.FnServlet 0x7c3fa644 "io.pedestal.http.servlet.FnServlet@7c3fa644"],
+ #object[io.pedestal.http.servlet.FnServlet 0x5cef1d3e "io.pedestal.http.servlet.FnServlet@5cef1d3e"],
  :io.pedestal.http/server
- #object[org.eclipse.jetty.server.Server 0x609207dc "Server@609207dc{STARTED}[9.4.18.v20190429]"],
+ #object[org.eclipse.jetty.server.Server 0x88374fd "Server@88374fd{STARTED}[9.4.18.v20190429]"],
  :io.pedestal.http/join? false,
- :io.pedestal.http/stop-fn #function[io.pedestal.http.jetty/server/fn--21536]}
+ :io.pedestal.http/stop-fn #function[io.pedestal.http.jetty/server/fn--21656]}
 clj꞉fruit-loop.main꞉> 
-#'fruit-loop.handlers.routes/dev-server-config
+#'fruit-loop.controllers.board/create
+clj꞉fruit-loop.controllers.board꞉> 
+#'fruit-loop.handlers.routes/create-board
 clj꞉fruit-loop.handlers.routes꞉> 
+#'fruit-loop.controllers.board/create
+clj꞉fruit-loop.controllers.board꞉> 
+{"74e1e240-6848-4907-8127-4aa25e596b3e"
+ #:board{:width 23, :height 45, :fruit-position {:x 22, :y 18}, :id "74e1e240-6848-4907-8127-4aa25e596b3e"}}
+clj꞉fruit-loop.controllers.board꞉> 
+#atom[{74e1e240-6848-4907-8127-4aa25e596b3e #:board{:width 23, :height 45, :fruit-position {:x 22, :y 18}, :id 74e1e240-6848-4907-8127-4aa25e596b3e}} 0x2c5ff279]
+nil
+clj꞉fruit-loop.db.board꞉> 
+#'fruit-loop.db.board/get-all-clothes
+clj꞉fruit-loop.db.board꞉> 
+{"74e1e240-6848-4907-8127-4aa25e596b3e"
+ #:board{:width 23, :height 45, :fruit-position {:x 22, :y 18}, :id "74e1e240-6848-4907-8127-4aa25e596b3e"}}
+clj꞉fruit-loop.db.board꞉> 
+; Syntax error compiling at (src/fruit_loop/db/board.clj:16:1).
+; Unable to resolve symbol: get-board in this context
+clj꞉fruit-loop.db.board꞉> 
+#'fruit-loop.db.board/get-all-boards
+clj꞉fruit-loop.db.board꞉> 
+{"74e1e240-6848-4907-8127-4aa25e596b3e"
+ #:board{:width 23, :height 45, :fruit-position {:x 22, :y 18}, :id "74e1e240-6848-4907-8127-4aa25e596b3e"}}
+clj꞉fruit-loop.db.board꞉> 
+#'fruit-loop.db.board/get-by-id
+clj꞉fruit-loop.db.board꞉> 
+#'fruit-loop.db.board/get-all-boards
+clj꞉fruit-loop.db.board꞉> 
+; Syntax error compiling at (src/fruit_loop/logic/board.clj:11:27).
+; Unable to resolve symbol: position in this context
+clj꞉fruit-loop.logic.board꞉> 
+#'fruit-loop.logic.board/position
+clj꞉fruit-loop.logic.board꞉> 
+#'fruit-loop.logic.board/->board
+clj꞉fruit-loop.logic.board꞉> 
+#'fruit-loop.logic.board/->board
+clj꞉fruit-loop.logic.board꞉> 
