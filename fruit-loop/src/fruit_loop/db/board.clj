@@ -11,6 +11,9 @@
     (let [new-id (uuid)]
       (swap! board-db assoc new-id (assoc board :board/id new-id)))))
 
+
+
+
 (defn get-all-boards [] @board-db)
 
 (defn get-by-id [id]

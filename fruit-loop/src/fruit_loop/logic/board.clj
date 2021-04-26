@@ -13,3 +13,10 @@
           :score 0
           :state :inactive})
 
+(defn updating [old-board score state player-position]
+  (assoc old-board
+         :board/state state
+         :board/score score
+         :board/player-position player-position
+         :board/fruit-position (position (get player-position :x)
+                                         (get player-position :y))))
