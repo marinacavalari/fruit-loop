@@ -6,7 +6,8 @@
   :dependencies [[org.clojure/clojure "1.10.3"]
                  [io.pedestal/pedestal.service "0.5.8"]
                  [io.pedestal/pedestal.jetty "0.5.8"]
-                 [cheshire/cheshire "5.10.0"]]
+                 [cheshire/cheshire "5.10.0"]
+                 [org.clojure/data.json "2.2.1"]]
   :resource-paths ["config" "resources"]
   :profiles {:dev {:aliases {"run-dev" ["trampoline" "run" "-m" "fruit-loop.main-dev-web/-main"]}
                    :dependencies [[io.pedestal/pedestal.service-tools "0.5.8"]]

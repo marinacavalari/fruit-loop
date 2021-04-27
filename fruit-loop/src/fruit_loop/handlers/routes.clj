@@ -2,7 +2,8 @@
   (:require [io.pedestal.http :as server]
             [io.pedestal.http.body-params :as body-params]
             [io.pedestal.http.route :as route]
-            [fruit-loop.controllers.board :as c.board]))
+            [fruit-loop.controllers.board :as c.board]
+            [clojure.data.json :as json]))
 
 (def common-interceptors
   [(body-params/body-params)])
@@ -13,9 +14,35 @@
    :headers {"Content-Type" "application/json"}
    :body {}})
 
+(defn- delete-board [_]
+  (c.board/delete)
+  {:status 200
+   :body {}})
+
+(defn- get-board [_]
+  {:status 200
+   :headers {"Content-Type" "application/json"}
+   :body (c.board/get-board)})
+
+(defn- get-state [_]
+  {:status 200
+   :headers {"Content-Type" "application/json"}
+   :body (json/write-str (c.board/state))})
+
+(defn- movements [{{:keys [movement]} :json-params}]
+  (c.board/update-state (c.board/get-board) movement)
+  {:status 200
+   :headers {"Content-Type" "application/json"}
+   :body {}})
+
 
 (defn routes []
-  #{["/board" :post (conj common-interceptors create-board) :route-name :create-board]})
+  #{["/game" :post (conj common-interceptors create-board) :route-name :create-board]
+    ["/game" :delete (conj common-interceptors delete-board) :route-name :delete-board]
+    ["/board" :get (conj common-interceptors get-board) :route-name :get-board]
+    ["/game/state" :get (conj common-interceptors get-state) :route-name :get-state]
+    ["/player/move/:movement" :post (conj common-interceptors movements) :route-name :movements]})
+
 
 (def server-config
   {::server/port 8080

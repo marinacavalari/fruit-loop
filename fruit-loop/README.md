@@ -1,10 +1,10 @@
 # fruit-loop
 
 
-- `POST /game` - Should create a new game. Request body should be a json: `{"width":10, "height": 10}`.
+- `POST /game` - Should create a new game. Request body should be a json: `{"width":10, "height": 10}`. 
 It should also create a fruit in a random location of the board.
 
-- `DELETE /game` - Should reset/delete the game state
+- `DELETE /game` - Should reset/delete the game state 
 
 - `POST /player/move/:movement`  (up, down, right ,left) - Should move the player 1 block
 
