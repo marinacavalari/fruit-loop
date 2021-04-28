@@ -14,7 +14,8 @@
 (defn get-state [board]
   (select-keys board [:score :player-position :fruit-position]))
 
-(defn move->new-position [move player-position]
+(defn move->new-position [move {:keys [player-position]}]
+  (println "------->" move player-position)
   (case move
     "right" (update player-position :x inc)
     "left" (update player-position :x dec)
@@ -45,16 +46,11 @@
                :player-position new-player-position
                :score (positions->score new-player-position board)))))
 
-(defn is-valid? [board x y new-player-position]
-   (if (or (< x 0)
-           (< y 0)
-           (>= x (-> board :player-position :x))
-           (>= y (-> board :player-position :y)))
-     (throw (ex-info "Invalid move" {:position new-player-position}))
-     new-player-position))
-
-
-
+(defn valid? [board {:keys [x y]}]
+  (or (< x 0)
+      (< y 0)
+      (>= x (-> board :width))
+      (>= y (-> board :height))))
 
 
 ;; (let [display-width (+ 2 (:width board))
