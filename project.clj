@@ -13,4 +13,4 @@
                    :dependencies [[io.pedestal/pedestal.service-tools "0.5.8"]]
                    :main fruit-loop.main-dev-web}}
   :aliases {:cli ["with-profile" "cli" "run"]}
-  :repl-options {:init-ns fruit-loop.main})
+  :repl-options {:init-ns fruit-loop.dev})

@@ -29,18 +29,17 @@
    :headers {"Content-Type" "application/json"}
    :body (json/write-str (c.board/state))})
 
-(defn- movements [{{:keys [movement]} :json-params}]
-  (c.board/update-state (c.board/get-board) movement)
+(defn- move-player [{{:keys [movement]} :path-params}]
+  (c.board/update-state movement)
   {:status 200
    :body {}})
-
 
 (defn routes []
   #{["/game" :post (conj common-interceptors create-board) :route-name :create-board]
     ["/game" :delete (conj common-interceptors delete-board) :route-name :delete-board]
     ["/board" :get (conj common-interceptors get-board) :route-name :get-board]
     ["/game/state" :get (conj common-interceptors get-state) :route-name :get-state]
-    ["/player/move/:movement" :post (conj common-interceptors movements) :route-name :movements]})
+    ["/player/move/:movement" :post (conj common-interceptors move-player) :route-name :move-player]})
 
 
 (def server-config

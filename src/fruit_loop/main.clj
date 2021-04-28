@@ -3,7 +3,6 @@
             [fruit-loop.handlers.routes :as h.routes]))
 
 (defn -main [& _args]
-  (println "\nCreating your [DEV] server...")
   (-> h.routes/dev-server-config
       server/default-interceptors
       server/dev-interceptors

@@ -11,12 +11,12 @@
     :player-position (position width height)
     :score 0})
 
-(defn get-state [{:keys [board]}]
+(defn get-state [board]
   (select-keys board [:score :player-position :fruit-position]))
 
 (defn move->new-position [move player-position]
   (case move
-    "rigth" (update player-position :x inc)
+    "right" (update player-position :x inc)
     "left" (update player-position :x dec)
     "up" (update player-position :y inc)
     "down" (update player-position :y dec)))
@@ -35,12 +35,55 @@
 (defn won? [{:keys [score]}]
   (= 3 score))
 
-(defn move [{:keys [board player-position score] :as game} move]
-  (let [new-player-position (move->new-position move player-position)
-        new-fruit-position (player-position->fruit-position new-player-position game)]
+
+(defn move [board new-player-position]
+  (let [new-fruit-position (player-position->fruit-position new-player-position board)]
     (-> board
         (assoc :width 
                :height
                :fruit-position new-fruit-position
                :player-position new-player-position
-               :score (positions->score new-player-position new-fruit-position)))))
+               :score (positions->score new-player-position board)))))
+
+(defn is-valid? [board x y new-player-position]
+   (if (or (< x 0)
+           (< y 0)
+           (>= x (-> board :player-position :x))
+           (>= y (-> board :player-position :y)))
+     (throw (ex-info "Invalid move" {:position new-player-position}))
+     new-player-position))
+
+
+
+
+
+;; (let [display-width (+ 2 (:width board))
+;;       display-height (+ 2 (:height board))
+;;       player-x (-> board :player-position :x)
+;;       player-y (-> board :player-position :y)
+;;       fruit-x (-> board :fruit-position :x)
+;;       fruit-y (-> board :fruit-position :y)]
+;;   (->> (for [y (range display-height)
+;;              x (range display-width)]
+;;          (cond
+;;            (and (= x player-x)
+;;                 (= y player-y))
+;;            "o"
+
+;;            (and (= x fruit-x)
+;;                 (= y fruit-y))
+;;            "x"
+
+;;            (or (= x 0)
+;;                (= (inc x) display-width))
+;;            "|"
+
+;;            (or (= y 0)
+;;                (= (inc y) display-height))
+;;            "-"
+
+;;            :else " "))
+;;        (partition display-width)
+;;        (mapv #(clojure.string/join "" %))
+;;        (clojure.string/join "\n")
+;;        println))

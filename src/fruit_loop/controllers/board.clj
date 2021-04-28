@@ -16,7 +16,13 @@
 (defn get-board []
   (db.board/get-board))
 
-(defn update-state [board move]
-  (-> board
-       (l.board/move move)
-       db.board/upsert!))
+(defn assert-valid-new-position! [board {:keys [x y] :as new-player-position}]
+(l.board/is-valid? board x y new-player-position))
+
+
+(defn update-state [movement]
+  (let [board (get-board)]
+    (->> (l.board/move->new-position movement)
+         (assert-valid-new-position! board)
+         (l.board/move board)
+         db.board/upsert!)))
