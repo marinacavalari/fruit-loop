@@ -32,7 +32,10 @@
     (inc score)
     score))
 
-(defn move [{:keys [board player-position width height] :as game} move]
+(defn won? [{:keys [score]}]
+  (= 3 score))
+
+(defn move [{:keys [board player-position score] :as game} move]
   (let [new-player-position (move->new-position move player-position)
         new-fruit-position (player-position->fruit-position new-player-position game)]
     (-> board

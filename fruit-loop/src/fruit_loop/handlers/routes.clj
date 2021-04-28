@@ -32,7 +32,6 @@
 (defn- movements [{{:keys [movement]} :json-params}]
   (c.board/update-state (c.board/get-board) movement)
   {:status 200
-   :headers {"Content-Type" "application/json"}
    :body {}})
 
 
