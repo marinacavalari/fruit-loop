@@ -1,4 +1,5 @@
-(ns fruit-loop.logic.board)
+(ns fruit-loop.logic.board 
+  (:require [clojure.string :as string]))
 
 (defn position [width height]
   {:x (rand-int width)
@@ -52,34 +53,34 @@
       (>= x (-> board :width))
       (>= y (-> board :height))))
 
+(defn display [board]
+  (let [display-width (+ 2 (:width board))
+        display-height (+ 2 (:height board))
+        player-x (-> board :player-position :x)
+        player-y (-> board :player-position :y)
+        fruit-x (-> board :fruit-position :x)
+        fruit-y (-> board :fruit-position :y)]
+    (->> (for [y (range display-height)
+               x (range display-width)]
+           (cond
+             (and (= x player-x)
+                  (= y player-y))
+             "o"
 
-;; (let [display-width (+ 2 (:width board))
-;;       display-height (+ 2 (:height board))
-;;       player-x (-> board :player-position :x)
-;;       player-y (-> board :player-position :y)
-;;       fruit-x (-> board :fruit-position :x)
-;;       fruit-y (-> board :fruit-position :y)]
-;;   (->> (for [y (range display-height)
-;;              x (range display-width)]
-;;          (cond
-;;            (and (= x player-x)
-;;                 (= y player-y))
-;;            "o"
+             (and (= x fruit-x)
+                  (= y fruit-y))
+             "x"
 
-;;            (and (= x fruit-x)
-;;                 (= y fruit-y))
-;;            "x"
+             (or (= x 0)
+                 (= (inc x) display-width))
+             "|"
 
-;;            (or (= x 0)
-;;                (= (inc x) display-width))
-;;            "|"
+             (or (= y 0)
+                 (= (inc y) display-height))
+             "-"
 
-;;            (or (= y 0)
-;;                (= (inc y) display-height))
-;;            "-"
-
-;;            :else " "))
-;;        (partition display-width)
-;;        (mapv #(clojure.string/join "" %))
-;;        (clojure.string/join "\n")
-;;        println))
+             :else " "))
+         (partition display-width)
+         (mapv #(clojure.string/join "" %))
+         (string/join "\n")
+         )))
