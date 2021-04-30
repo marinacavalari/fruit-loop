@@ -26,4 +26,8 @@
     (->> (l.board/move->new-position movement board)
          (assert-valid-new-position! board)
          (l.board/move board)
-         db.board/upsert!)))                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+         db.board/upsert!))) 
+
+(defn display-board []
+  (->> (get-board)
+       l.board/display))

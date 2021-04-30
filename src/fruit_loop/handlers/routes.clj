@@ -34,12 +34,17 @@
   {:status 200
    :body {}})
 
+(defn- display [_]
+  {:status 200
+   :body (c.board/display-board)})
+
 (defn routes []
   #{["/game" :post (conj common-interceptors create-board) :route-name :create-board]
     ["/game" :delete (conj common-interceptors delete-board) :route-name :delete-board]
     ["/board" :get (conj common-interceptors get-board) :route-name :get-board]
     ["/game/state" :get (conj common-interceptors get-state) :route-name :get-state]
-    ["/player/move/:movement" :post (conj common-interceptors move-player) :route-name :move-player]})
+    ["/player/move/:movement" :post (conj common-interceptors move-player) :route-name :move-player]
+    ["/game/display" :get (conj common-interceptors display) :route-name :display]})
 
 
 (def server-config
