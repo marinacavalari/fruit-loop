@@ -1,5 +1,5 @@
 (ns fruit-loop.core-test
-  (:require [clojure.test :refer :all]
+  (:require [clojure.test :refer [deftest testing is]]
             [fruit-loop.core :refer :all]))
 
 (deftest a-test

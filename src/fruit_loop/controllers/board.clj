@@ -21,7 +21,7 @@
     (throw (ex-info "Invalid move" {:new-position new-player-position}))
     new-player-position))
 
-(defn update-state [movement]
+(defn move [movement]
   (let [board (get-board)]
     (->> (l.board/move->new-position movement board)
          (assert-valid-new-position! board)

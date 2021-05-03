@@ -30,7 +30,7 @@
    :body (json/write-str (c.board/state))})
 
 (defn- move-player [{{:keys [movement]} :path-params}]
-  (c.board/update-state movement)
+  (c.board/move movement)
   {:status 200
    :body {}})
 

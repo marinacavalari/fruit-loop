@@ -16,12 +16,11 @@
   (select-keys board [:score :player-position :fruit-position]))
 
 (defn move->new-position [move {:keys [player-position]}]
-  (println "------->" move player-position)
   (case move
     "right" (update player-position :x inc)
     "left" (update player-position :x dec)
-    "up" (update player-position :y inc)
-    "down" (update player-position :y dec)))
+    "up" (update player-position :y dec)
+    "down" (update player-position :y inc)))
 
 (defn player-position->fruit-position
   [new-player-position {:keys [fruit-position width height]}]
@@ -37,9 +36,7 @@
 (defn move [board new-player-position]
   (let [new-fruit-position (player-position->fruit-position new-player-position board)]
     (-> board
-        (assoc :width
-               :height
-               :fruit-position new-fruit-position
+        (assoc :fruit-position new-fruit-position
                :player-position new-player-position
                :score (positions->score new-player-position board)))))
 
@@ -50,29 +47,32 @@
       (>= y (-> board :height))))
 
 (defn display [board]
+  (println "---------->>>" (:width board))
   (let [display-width (+ 2 (:width board))
         display-height (+ 2 (:height board))
-        player-x (-> board :player-position :x)
-        player-y (-> board :player-position :y)
-        fruit-x (-> board :fruit-position :x)
-        fruit-y (-> board :fruit-position :y)]
-    (->> (for [y (range display-height)
-               x (range display-width)]
+        player-x (-> board :player-position :x inc)
+        player-y (-> board :player-position :y inc)
+        fruit-x (-> board :fruit-position :x inc)
+        fruit-y (-> board :fruit-position :y inc)]
+    (->> (for [y1 (range display-height)
+               x1 (range display-width)
+               :let [x2 (inc x1)
+                     y2 (inc y1)]]
            (cond
-             (and (= x player-x)
-                  (= y player-y))
+             (and (= x1 player-x)
+                  (= y1 player-y))
              "o"
 
-             (and (= x fruit-x)
-                  (= y fruit-y))
+             (and (= x1 fruit-x)
+                  (= y1 fruit-y))
              "x"
 
-             (or (= x 0)
-                 (= (inc x) display-width))
+             (or (= x1 0)
+                 (= x2 display-width))
              "|"
 
-             (or (= y 0)
-                 (= (inc y) display-height))
+             (or (= y1 0)
+                 (= y2 display-height))
              "-"
 
              :else " "))
