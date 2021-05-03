@@ -10,6 +10,6 @@ pom.xml.asc
 /.lein-*
 /.nrepl-port
 /.prepl-port
-.hgignore
+.hgignore   
 .hg/
 .lsp/sqlite.db

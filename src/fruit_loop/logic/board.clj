@@ -1,4 +1,4 @@
-(ns fruit-loop.logic.board 
+(ns fruit-loop.logic.board
   (:require [clojure.string :as string]))
 
 (defn position [width height]
@@ -7,10 +7,10 @@
 
 (defn ->board [width height]
   {:width width
-    :height height
-    :fruit-position (position width height)
-    :player-position (position width height)
-    :score 0})
+   :height height
+   :fruit-position (position width height)
+   :player-position (position width height)
+   :score 0})
 
 (defn get-state [board]
   (select-keys board [:score :player-position :fruit-position]))
@@ -34,14 +34,10 @@
     (inc score)
     score))
 
-(defn won? [{:keys [score]}]
-  (= 3 score))
-
-
 (defn move [board new-player-position]
   (let [new-fruit-position (player-position->fruit-position new-player-position board)]
     (-> board
-        (assoc :width 
+        (assoc :width
                :height
                :fruit-position new-fruit-position
                :player-position new-player-position
@@ -82,5 +78,12 @@
              :else " "))
          (partition display-width)
          (mapv #(clojure.string/join "" %))
-         (string/join "\n")
-         )))
+         (string/join "\n"))))
+
+(defn score [board]
+  (if (= 3 (-> board :score))
+    (str "WON!")
+    (-> board :score)))
+
+(defn screen [display score]
+  (str display "\n\n Score: " score))

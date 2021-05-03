@@ -29,5 +29,7 @@
          db.board/upsert!))) 
 
 (defn display-board []
-  (->> (get-board)
-       l.board/display))
+  (let [board (get-board)
+        display (l.board/display board)
+        score (l.board/score board)]
+    (l.board/screen display score)))
