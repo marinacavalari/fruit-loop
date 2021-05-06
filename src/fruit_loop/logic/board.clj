@@ -87,3 +87,9 @@
 
 (defn screen [display score]
   (str display "\n\n Score: " score))
+
+(defn output [{{:keys [width height]} :board}]
+  (if (and (> width 0) (> height 0))
+    (:width :height {:width width :height height})
+    (println "{\"state\": \"failed\", \"violations\": [\"invalid-board-size\"]}")))
+

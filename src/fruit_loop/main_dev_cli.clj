@@ -1,4 +1,4 @@
-(ns fruit-loop.main
+(ns fruit-loop.main-dev-web
   (:require [io.pedestal.http :as server]
             [fruit-loop.handlers.routes :as h.routes]))
 

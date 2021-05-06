@@ -11,6 +11,7 @@
   :resource-paths ["config" "resources"]
   :profiles {:dev {:aliases {"run-dev" ["trampoline" "run" "-m" "fruit-loop.main-dev-web/-main"]}
                    :dependencies [[io.pedestal/pedestal.service-tools "0.5.8"]]
-                   :main fruit-loop.main-dev-web}}
+                   :main fruit-loop.main-dev-web}
+             :cli {:main fruit-loop.main-dev-cli}}
   :aliases {:cli ["with-profile" "cli" "run"]}
   :repl-options {:init-ns fruit-loop.dev})
