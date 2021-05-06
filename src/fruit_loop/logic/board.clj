@@ -47,7 +47,6 @@
       (>= y (-> board :height))))
 
 (defn display [board]
-  (println "---------->>>" (:width board))
   (let [display-width (+ 2 (:width board))
         display-height (+ 2 (:height board))
         player-x (-> board :player-position :x inc)
@@ -92,4 +91,8 @@
   (if (and (> width 0) (> height 0))
     (:width :height {:width width :height height})
     (println "{\"state\": \"failed\", \"violations\": [\"invalid-board-size\"]}")))
+
+(defn sucess []
+  {:state :sucess
+   :violations []})
 

@@ -1,16 +1,10 @@
 (ns fruit-loop.main-dev-web
-  (:require [fruit-loop.controllers.board :as c.board]
-            [fruit-loop.logic.board :as l.board]
-            [clojure.data.json :as json]))
+  (:require [io.pedestal.http :as server]
+            [fruit-loop.handlers.routes :as h.routes]))
 
-(defn create [input]
-  (let [board (-> input
-                  (json/read-str :key-fn keyword)
-                  (l.board/output))
-        width (:width board)
-        height (:height board)]
-    (c.board/create width height)))
-
-
-(defn -main [& args]
-  (create args))
+(defn -main [& _args]
+  (-> h.routes/dev-server-config
+      server/default-interceptors
+      server/dev-interceptors
+      server/create-server
+      server/start))
