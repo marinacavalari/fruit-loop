@@ -14,7 +14,14 @@
       (c.board/create width height))
     (json/write-str (l.board/sucess))))
 
-(defn movement [input])
+(defn movement [input]
+  (let [move (-> input
+                 (json/read-str :key-fn keyword)
+                 l.board/movement-cli)]
+    (if (nil? move)
+      move
+      (c.board/move move))
+    (json/write-str (l.board/sucess))))
 
 (defn -main [& args]
   (create args))

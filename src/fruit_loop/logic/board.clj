@@ -92,7 +92,13 @@
     (:width :height {:width width :height height})
     (println "{\"state\": \"failed\", \"violations\": [\"invalid-board-size\"]}")))
 
-(defn sucess []
+(defn movement-cli [{{:keys [move]} :board}]
+  (if (.contains ["left" "rigth" "up" "down"] move)
+    move
+    (println "{\"state\": \"failed\", \"violations\" [\"invalid-move\"]}")))
+
+(defn sucess  []
   {:state :sucess
    :violations []})
+
 
