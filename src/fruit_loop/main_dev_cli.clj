@@ -1,27 +1,37 @@
-(ns fruit-loop.main-dev-web
+(ns fruit-loop.main-dev-cli
   (:require [fruit-loop.controllers.board :as c.board]
-            [fruit-loop.logic.board :as l.board]
             [clojure.data.json :as json]))
 
+(defn- safe-read-json []
+  (try
+    (-> (read-line)
+        (json/read-str :key-fn keyword))
+    (catch Exception _
+      nil)))
+
 (defn create [input]
-  (let [board (-> input
-                  (json/read-str :key-fn keyword)
-                  (l.board/output))
-        width (:width board)
-        height (:height board)]
-    (if (nil? board)
-      board
-      (c.board/create width height))
-    (json/write-str (l.board/sucess))))
+  (try
+    (c.board/create! input)
+    (-> {:state :success
+         :violations []}
+        json/write-str
+        println)
+    (catch clojure.lang.ExceptionInfo e
+      (-> {:state :failed
+           :violations [(-> e ex-data :violations)]}
+          json/write-str
+          println))))
 
-(defn movement [input]
-  (let [move (-> input
-                 (json/read-str :key-fn keyword)
-                 l.board/movement-cli)]
-    (if (nil? move)
-      move
-      (c.board/move move))
-    (json/write-str (l.board/sucess))))
+(defn -main [& _args]
+  (loop []
+    (let [{:keys [board player] :as input} (safe-read-json)]
+      (cond
+        board
+        (create input)
 
-(defn -main [& args]
-  (create args))
+      ;; player
+      ;; (movement input)
+
+        :else
+        (println "invalid command"))
+      (recur))))

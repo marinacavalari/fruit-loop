@@ -8,8 +8,8 @@
 (def common-interceptors
   [(body-params/body-params)])
 
-(defn- create-board [{{:keys [width height]} :json-params}]
-  (c.board/create width height)
+(defn- create-board [{board :json-params}]
+  (c.board/create! board)
   {:status 201
    :headers {"Content-Type" "application/json"}
    :body {}})

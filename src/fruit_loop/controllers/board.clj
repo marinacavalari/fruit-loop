@@ -2,7 +2,13 @@
   (:require [fruit-loop.logic.board :as l.board]
             [fruit-loop.db.board :as db.board]))
 
-(defn create [width height]
+(defn- assert-input! [input]
+  (if (l.board/valid-input? input)
+    input
+    (throw (ex-info "Invalid board size" {:violations :invalid-size}))))
+
+(defn create! [{{:keys [width height]} :board :as input}]
+  (assert-input! input)
   (-> (l.board/->board width height)
       db.board/upsert!))
 

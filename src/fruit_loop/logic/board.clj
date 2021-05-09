@@ -87,18 +87,9 @@
 (defn screen [display score]
   (str display "\n\n Score: " score))
 
-(defn output [{{:keys [width height]} :board}]
-  (if (and (> width 0) (> height 0))
-    (:width :height {:width width :height height})
-    (println "{\"state\": \"failed\", \"violations\": [\"invalid-board-size\"]}")))
+(defn valid-input? [{{:keys [width height]} :board}]
+  (and (> width 0) 
+       (> height 0)))
 
-(defn movement-cli [{{:keys [move]} :board}]
-  (if (.contains ["left" "rigth" "up" "down"] move)
-    move
-    (println "{\"state\": \"failed\", \"violations\" [\"invalid-move\"]}")))
-
-(defn sucess  []
-  {:state :sucess
-   :violations []})
 
 
