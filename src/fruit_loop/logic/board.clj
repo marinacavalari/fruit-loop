@@ -20,7 +20,8 @@
     "right" (update player-position :x inc)
     "left" (update player-position :x dec)
     "up" (update player-position :y dec)
-    "down" (update player-position :y inc)))
+    "down" (update player-position :y inc)
+    nil))
 
 (defn player-position->fruit-position
   [new-player-position {:keys [fruit-position width height]}]
@@ -88,7 +89,9 @@
   (str display "\n\n Score: " score))
 
 (defn valid-input? [{{:keys [width height]} :board}]
-  (and (> width 0) 
+  (and width
+       height
+       (> width 0)
        (> height 0)))
 
 

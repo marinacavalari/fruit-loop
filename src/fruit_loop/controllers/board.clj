@@ -24,10 +24,10 @@
 
 (defn assert-valid-new-position! [board new-player-position]
   (if (l.board/valid? board new-player-position)
-    (throw (ex-info "Invalid move" {:new-position new-player-position}))
+    (throw (ex-info "Invalid move" {:violations :invalid-move :position new-player-position}))
     new-player-position))
 
-(defn move [movement]
+(defn move [{{:keys [movement]} :board}]
   (let [board (get-board)]
     (->> (l.board/move->new-position movement board)
          (assert-valid-new-position! board)
